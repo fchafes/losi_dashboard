@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./ShowOrders.css";
 
 const ShowOrders = () => {
   const url = "http://localhost:3000/orders";
@@ -23,7 +24,7 @@ const ShowOrders = () => {
     <div className="App">
       <div className="container-fluid">
         <div className="row mt-3">
-          <div className="col-12">
+          <div className="col-12 table-container">
             <div className="table-responsive">
               <table className="table table-bordered">
                 <thead>
