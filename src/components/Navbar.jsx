@@ -6,11 +6,16 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "../App.css";
 import { IconContext } from "react-icons";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
-
   const showSidebar = () => setSidebar(!sidebar);
+  const location = useLocation();
+  const isIntroPage = location.pathname === "/login";
+  if (isIntroPage) {
+    return null;
+  }
 
   return (
     <>

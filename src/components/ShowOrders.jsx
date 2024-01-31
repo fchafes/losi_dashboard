@@ -29,7 +29,7 @@ const ShowOrders = () => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>Date</th>
                     <th>ID de Orden</th>
                     <th>Estado</th>
                     <th>Método de Pago</th>

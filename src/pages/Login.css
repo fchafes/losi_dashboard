@@ -1,0 +1,100 @@
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black ;
+}
+  .login-box {
+    width: 800px;
+    height: 550px;
+    background-color: rgba(249, 252, 252, 0);
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .login-box .row {
+    height: 100%;
+  }
+  
+  .login-box .row .col-7 {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 50px;
+  }
+  
+  .login-box .row .col-7 h3 {
+    color: #fff;
+    font-size: 1.25rem;
+  }
+  
+  .login-box .row .col-5 {
+    background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 35px;
+    padding-right: 50px;
+  }
+  
+  .login-box .row .col-5 h3 {
+    font-size: 1.25rem;
+  }
+  
+  .login-box .row .col-5 p {
+    font-size: 0.8rem;
+  }
+  
+  .login-box .row .col-5 .navigate-login {
+    text-align: center;
+  }
+  
+  .login-box .row .col-5 .navigate-login .navlink {
+    text-decoration: none;
+  }
+  
+  .login-box .row .col-5 .input {
+    font-size: 0.8rem;
+  }
+  
+  .login-box .row .col-5 .login-button {
+    width: 100%;
+    font-size: 0.8rem;
+    border-radius: 15px;
+    border-color: black;
+    margin-top: 15px;
+    background-color: black;
+  }
+  
+  .logo {
+    fill: #fff;
+    width: 300px;
+  }
+  
+  @media (max-width: 767px) {
+    .login-box {
+      width: 20rem; /* Hacer que la caja ocupe todo el ancho en pantallas pequeñas */
+    }
+  
+    .login-box .row .col-7 {
+      display: none; /* Ocultar la parte del login en pantallas pequeñas */
+    }
+  
+    .col-5 {
+      margin: 15px;
+      margin-left: 3px;
+      border-radius: 0 0 30px 30px;
+    }
+  
+    .login-box .row .col-5 {
+      display: flex; /* Mostrar la parte del signup en pantallas pequeñas */
+      order: 2; /* Cambiar el orden para que aparezca después del login */
+      padding: 40px; /* Ajustar el espacio de relleno para pantallas pequeña000}s */
+      width: 100%;
+    }
+  }
+  
