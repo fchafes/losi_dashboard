@@ -128,17 +128,17 @@ const ShowProducts = () => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>PRODUCTO</th>
-                    <th>DESCRIPCION</th>
-                    <th>PRECIO</th>
-                    <th></th>
+                    <th>ID</th>
+                    <th>PRODUCT</th>
+                    <th>DESCRIPTION</th>
+                    <th>PRICE</th>
+                    <th>EDIT/DELETE</th>
                   </tr>
                 </thead>
                 <tbody className="table-group-divider">
                   {products.map((product, i) => (
                     <tr key={product.id}>
-                      <td>{i + 1}</td>
+                      <td>{product.id}</td>
                       <td>{product.name}</td>
                       <td>{product.description}</td>
                       <td>

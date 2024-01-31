@@ -1,5 +1,4 @@
 /* ShowOrders.css */
-/* ShowOrders.css */
 .table-container {
   display: flex;
   justify-content: center;
@@ -11,10 +10,23 @@
   width: 50vw;
 }
 
-.table th{
-  background-color: grey;
+.table-bordered {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #dee2e6; /* Adjust border color */
 }
 
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6; /* Adjust border color */
+  padding: 8px;
+  text-align: center;
+}
+
+/* Aumentamos la especificidad para el color de fondo de los th */
+.table-bordered th {
+  background-color: grey !important; /* Adjust background color */
+}
 
 /* Optional: Hover effect */
 .table-bordered tbody tr:hover {

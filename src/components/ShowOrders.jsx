@@ -30,9 +30,10 @@ const ShowOrders = () => {
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>ID de Orden</th>
-                    <th>Estado</th>
-                    <th>Método de Pago</th>
+                    <th>ID</th>
+                    <th>State</th>
+                    <th>Payment Method</th>
+                    <th>Customer</th>
                     {/* Agrega más encabezados según tus necesidades */}
                   </tr>
                 </thead>
@@ -43,6 +44,8 @@ const ShowOrders = () => {
                       <td>{order.id}</td>
                       <td>{order.state}</td>
                       <td>{order.payment_method}</td>
+                      <td>{order.payment_method}</td>
+
                       {/* Agrega más celdas según tus necesidades */}
                     </tr>
                   ))}
