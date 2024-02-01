@@ -3,13 +3,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import logo from "/losiFlor.png";
 import { NavLink, useNavigate } from "react-router-dom";
-/*import { useDispatch } from "react-redux";*/
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
+import { createData } from "../redux/tokenReducer.js";
 
 function Login() {
   const navigate = useNavigate();
-  /*const dispatch = useDispatch();*/
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,7 +24,7 @@ function Login() {
     });
   };
 
-  /*const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -36,14 +37,14 @@ function Login() {
       if (response.status === 200) {
         const data = response.data;
         dispatch(createData(data));
-        navigate("/home");
+        navigate("/");
         console.log(data);
       }
     } catch (error) {
       console.log("Error:", error);
     }
   };
-*/
+
   return (
     <>
       <div className="login-container">
@@ -55,14 +56,14 @@ function Login() {
             <div className="col-5">
               <h3>Login</h3>
               <p>Ready to start using Dashboard?</p>
-              <Form className="mb-3" /*onSubmit={handleSubmit}/*/>
+              <Form className="mb-3" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Control
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Username or email"
+                    placeholder="E mail"
                     className="input"
                   />
                 </Form.Group>
