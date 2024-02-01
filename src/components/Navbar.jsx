@@ -7,6 +7,11 @@ import Button from 'react-bootstrap/Button';
 import "./Navbar.css";
 
 const Navbar = () => {
+  const isLoginPage = location.pathname === "/login"; 
+  if (isLoginPage) {
+    return null;
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
