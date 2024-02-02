@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@tremor/react";
 import axios from "axios";
+
 import React, { useState, useEffect } from "react";
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -65,17 +66,25 @@ const Products = () => {
             <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
               Price
             </TableHeaderCell>
+            <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
+              Actions
+            </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products.map((product, index) => (
             <TableRow key={product.id}>
               <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                {product.name}
+                {product.index}
               </TableCell>
-              <TableCell>{product.photo}</TableCell>
+              <TableCell>{product.name}</TableCell>
+              <TableCell>
+                <img src={product.photo} alt="product" />
+              </TableCell>
               <TableCell>{product.description}</TableCell>
               <TableCell>{product.price}</TableCell>
+
+              <TableCell>{product.actions}</TableCell>
             </TableRow>
           ))}
         </TableBody>
