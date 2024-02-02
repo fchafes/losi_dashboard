@@ -1,10 +1,11 @@
 // App.jsx
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import ShowProducts from "./components/ShowProducts";
 import ShowOrders from "./components/ShowOrders";
 import Login from "./pages/Login";
 import SummaryPage from "./pages/SummaryPage";
+import Customers from "./components/Customers";
+import Products from "./components/Products";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<SummaryPage />} />
-        <Route path="/admin/products" element={<ShowProducts />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/orders" element={<ShowOrders />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/customers" element={<Customers />} />
       </Routes>
     </>
   );
