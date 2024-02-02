@@ -21,30 +21,29 @@ const ShowOrders = () => {
   };
 
   return (
-    <div className="App">
-      <div className="container-fluid">
-        <div className="row mt-3">
+      <div className="orders-container">
+        <div className="row">
           <div className="col-12 table-container">
             <div className="table-responsive">
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Date</th>
                     <th>ID</th>
+                    <th>Date</th>
                     <th>State</th>
                     <th>Payment Method</th>
-                    <th>Customer</th>
+                    <th>Customer ID</th>
                     {/* Agrega más encabezados según tus necesidades */}
                   </tr>
                 </thead>
                 <tbody>
                   {orders.map((order, index) => (
                     <tr key={order.id}>
-                      <td>{index + 1}</td>
                       <td>{order.id}</td>
+                      <td>{order.createdAt}</td>
                       <td>{order.state}</td>
                       <td>{order.payment_method}</td>
-                      <td>{order.payment_method}</td>
+                      <td>{order.customerId}</td>
 
                       {/* Agrega más celdas según tus necesidades */}
                     </tr>
@@ -55,7 +54,6 @@ const ShowOrders = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

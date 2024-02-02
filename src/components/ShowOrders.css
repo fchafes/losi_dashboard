@@ -1,12 +1,14 @@
 /* ShowOrders.css */
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.orders-container {
+  padding-top: 60px;
+  padding-left: 211px;
+  height: 100vh;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .table-responsive {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 50vw;
 }
 
@@ -25,7 +27,7 @@
 
 /* Aumentamos la especificidad para el color de fondo de los th */
 .table-bordered th {
-  background-color: grey !important; /* Adjust background color */
+  background-color: rgb(199, 199, 199) !important; /* Adjust background color */
 }
 
 /* Optional: Hover effect */

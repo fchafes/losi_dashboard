@@ -1,67 +1,87 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { FaShoppingCart, FaMoneyBillAlt, FaBox } from "react-icons/fa";
+import "./SummaryPage.css"
+import Button from 'react-bootstrap/Button';
+import sales from "/sales.png";
+import customers from "/customers.png";
+import revenue from "/revenue.png";
 
 const SummaryPage = () => {
-  const [productCount, setProductCount] = useState(0);
-  const [orderCount, setOrderCount] = useState(0);
-  const [totalRevenue, setTotalRevenue] = useState(0);
-
-  useEffect(() => {
-    // Fetch product count
-    axios
-      .get("http://localhost:3000/admin/products")
-      .then((response) => {
-        setProductCount(response.data.length);
-      })
-      .catch((error) => {
-        console.error("Error fetching product count:", error);
-      });
-
-    // Fetch order count and total revenue
-    axios
-      .get("http://localhost:3000/orders")
-      .then((response) => {
-        const orders = response.data;
-        setOrderCount(orders.length);
-        const revenue = orders.reduce(
-          (acc, order) => acc + order.total_price,
-          0
-        );
-        setTotalRevenue(revenue);
-      })
-      .catch((error) => {
-        console.error("Error fetching order count and total revenue:", error);
-      });
-  }, []);
 
   return (
-    <main className="container-fluid" style={{ marginLeft: "200px" }}>
-      <h1 className="text-center">Summary</h1>
-      <div className="row">
-        <div className="col-md-4">
-          <div className="summary-item">
-            <FaBox size={32} />
-            <h2>Products</h2>
-            <p>Total Products: {productCount}</p>
+    <>
+    <div className="summary-container">
+      <div className="summary-chart">
+        <div className="sales-left-panel">
+          <div className="left-panel-header">
+            <h2>Sales stats</h2>
+            <Button variant="outline-dark" size="sm">View All</Button>
+          </div>
+          <div className="left-panel-body">
+            <div className="left-panel-body-stats">
+              <img src="/chart_1.png" alt="" />
+            </div>
           </div>
         </div>
-        <div className="col-md-4">
-          <div className="summary-item">
-            <FaShoppingCart size={32} />
-            <h2>Orders</h2>
-            <p>Total Orders: {orderCount}</p>
+        <div className="sales-right-panel">
+          <div className="right-panel-header">
+            <div className="right-panel-header-smallBox">
+              <div className="smallBox-top">
+                <img src={sales} alt="" />
+                <p>...</p>
+              </div>
+              <div className="smallBox-bottom">
+                <h4>Total Sales</h4>
+                <p>$29.067</p>
+              </div>
+            </div>
+            <div className="right-panel-header-smallBox">
+              <div className="smallBox-top">
+                <img src={customers} alt="" />
+                <p>...</p>
+              </div>
+              <div className="smallBox-bottom">
+                <h4>Total Orders</h4>
+                <p>$29.067</p>
+              </div>
+            </div>
+            <div className="right-panel-header-smallBox">
+              <div className="smallBox-top">
+                <img src={revenue} alt="" />
+                <p>...</p>
+              </div>
+              <div className="smallBox-bottom">
+                <h4>Total Income</h4>
+                <p>$29.067</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="summary-item">
-            <FaMoneyBillAlt size={32} />
-            <h2>Revenue</h2>
-            <p>Total Revenue: ${totalRevenue.toFixed(2)}</p>
+          <div className="right-panel-body">
+            <img src="/chart_2.png" alt="" />
           </div>
         </div>
       </div>
-    </main>
+      <div className="summary-chart">
+        <div className="sales-left-panel">
+          <div className="left-panel-header">
+            <h2>Recent orders</h2>
+            <Button variant="outline-dark" size="sm">View All</Button>
+          </div>
+          <div className="left-panel-body">
+            <div className="left-panel-body-stats">
+              <img src="/chart_3.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div className="orders-right-panel">
+          <div className="orders-right-panel-header">
+          <h2>Overview</h2>
+          </div>
+          <div className="orders-right-panel-body">
+            <img src="/chart_4.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
   );
 };
 
