@@ -1,0 +1,19 @@
+.button{
+        margin-top: 6rem!important;
+    }
+
+
+.mt-8 {
+margin-left: 200px;
+  }
+
+.description-cell {
+    max-width: 200px; /* Ajusta el ancho máximo según tus necesidades */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Esto agregará puntos suspensivos si el texto es demasiado largo */
+  }
+  .product-image {
+    max-width: 100px; /* Ajusta el ancho máximo según tus necesidades */
+    height: auto;
+  }
