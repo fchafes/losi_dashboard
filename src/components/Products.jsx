@@ -22,7 +22,6 @@ const Products = () => {
         url: "http://localhost:3000/products",
       });
       setProducts(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
