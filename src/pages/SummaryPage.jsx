@@ -3,6 +3,9 @@ import Button from 'react-bootstrap/Button';
 import sales from "/sales.png";
 import customers from "/customers.png";
 import revenue from "/revenue.png";
+import SalesChart from "../components/SalesChart";
+import DailyChart from "../components/DailyChart";
+import OverviewChart from "../components/OverviewChart";
 
 const SummaryPage = () => {
 
@@ -17,7 +20,7 @@ const SummaryPage = () => {
           </div>
           <div className="left-panel-body">
             <div className="left-panel-body-stats">
-              <img src="/chart_1.png" alt="" />
+              <SalesChart />
             </div>
           </div>
         </div>
@@ -55,7 +58,8 @@ const SummaryPage = () => {
             </div>
           </div>
           <div className="right-panel-body">
-            <img src="/chart_2.png" alt="" />
+            <h4>Today's earnings</h4>
+            <DailyChart />
           </div>
         </div>
       </div>
@@ -76,7 +80,7 @@ const SummaryPage = () => {
           <h2>Overview</h2>
           </div>
           <div className="orders-right-panel-body">
-            <img src="/chart_4.png" alt="" />
+            <OverviewChart />
           </div>
         </div>
       </div>
