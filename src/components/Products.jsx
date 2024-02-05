@@ -7,7 +7,6 @@ import {
   TableHeaderCell,
   TableRow,
   Badge,
-  Title,
 } from "@tremor/react";
 import axios from "axios";
 import "./Products.css";
@@ -33,10 +32,10 @@ const Products = () => {
 
   return (
     <>
-      <div className="sm:flex sm:items-center sm:justify-between sm:space-x-10">
+      <div className="sm:flex sm:items-center sm:justify-between sm:space-x-10 header">
         <div>
           <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            Products
+            Products <Badge>{products.length}</Badge>
           </h3>
           <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
             Overview of all registered products within your organization.
