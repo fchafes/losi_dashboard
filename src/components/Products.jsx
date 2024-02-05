@@ -11,8 +11,15 @@ import {
 import axios from "axios";
 import "./Products.css";
 import React, { useState, useEffect } from "react";
+import ModalProductForm from "./ModalProductForm";
+import DeleteModal from "./DeleteModal";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura del modal
+  const [operation, setOperation] = useState(1); // Estado para indicar la operación (1: agregar, 2: editar)
+  const [selectedProduct, setSelectedProduct] = useState(null); // Estado para almacenar el producto seleccionado para edición
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Estado para controlar la apertura del modal de eliminación
 
   const fecthProducts = async () => {
     try {
@@ -30,6 +37,39 @@ const Products = () => {
     fecthProducts();
   }, []);
 
+  const handleAddProduct = () => {
+    setOperation(1); // Establece la operación como agregar
+    setIsModalOpen(true);
+  };
+
+  const handleEditProduct = (product) => {
+    setOperation(2); // Establece la operación como editar
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:3000/products/${selectedProduct.id}`
+      );
+      fetchProducts();
+      handleCloseModal(); // Cierra el modal de confirmación después de eliminar el producto
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  const handleOpenDeleteModal = (product) => {
+    setSelectedProduct(product);
+    setIsDeleteModalOpen(true); // Abre el modal de confirmación de eliminación
+  };
+
   return (
     <>
       <div className="sm:flex sm:items-center sm:justify-between sm:space-x-10 header">
@@ -42,6 +82,7 @@ const Products = () => {
           </p>
         </div>
         <button
+          onClick={handleAddProduct}
           type="button"
           className="button mt-4 w-full whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis sm:mt-0 sm:w-fit"
         >
@@ -94,7 +135,10 @@ const Products = () => {
               <TableCell>{product.price}</TableCell>
 
               <TableCell>
-                <button type="button">
+                <button
+                  onClick={() => handleEditProduct(product)}
+                  type="button"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -110,7 +154,10 @@ const Products = () => {
                     />
                   </svg>
                 </button>
-                <button type="button">
+                <button
+                  onClick={() => handleOpenDeleteModal(product)}
+                  type="button"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -131,6 +178,21 @@ const Products = () => {
           ))}
         </TableBody>
       </Table>
+      {isModalOpen && (
+        <ModalProductForm
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          operation={operation}
+          product={selectedProduct}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          isOpen={isDeleteModalOpen}
+          onClose={() => setIsDeleteModalOpen(false)} // Cierra el modal de confirmación de eliminación
+          onConfirm={handleConfirmDelete} // Invoca la función para confirmar la eliminación
+        />
+      )}
     </>
   );
 };
