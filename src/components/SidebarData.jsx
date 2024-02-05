@@ -2,6 +2,7 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
+import { MdPeople } from "react-icons/md";
 
 export const SidebarData = [
   {
@@ -18,7 +19,7 @@ export const SidebarData = [
   },
   {
     title: "Products",
-    path: "/admin/products",
+    path: "/products",
     icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
@@ -29,9 +30,9 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Messages",
-    path: "/messages",
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    title: "Customers",
+    path: "/customers",
+    icon: <MdPeople />,
     cName: "nav-text",
   },
   {
