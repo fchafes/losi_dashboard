@@ -67,7 +67,8 @@ const Products = () => {
 
   const handleOpenDeleteModal = (product) => {
     setSelectedProduct(product);
-    setIsDeleteModalOpen(true); // Abre el modal de confirmación de eliminación
+    setIsDeleteModalOpen(true); //
+    console.log("Modal de eliminación abierto para el producto:", product);
   };
 
   return (
@@ -89,12 +90,6 @@ const Products = () => {
           Add product
         </button>
       </div>
-      {/* 
-      <Title>
-        Products
-        <Badge>{products.length} </Badge>
-      </Title>
-*/}
 
       <Table className="mt-8">
         <TableHead>
