@@ -7,6 +7,7 @@ import SalesChart from "../components/SalesChart";
 import DailyChart from "../components/DailyChart";
 import OverviewChart from "../components/OverviewChart";
 import OverviewChartLegend from "../components/OverviewChartLegend";
+import RecentOrders from "../components/RecentOrders";
 
 const SummaryPage = () => {
 
@@ -16,7 +17,7 @@ const SummaryPage = () => {
       <div className="summary-chart">
         <div className="sales-left-panel">
           <div className="left-panel-header">
-            <h2>Sales stats</h2>
+            <h2>Sales Stats</h2>
             <Button variant="outline-dark" size="sm">View All</Button>
           </div>
           <div className="left-panel-body">
@@ -67,12 +68,12 @@ const SummaryPage = () => {
       <div className="summary-chart">
         <div className="sales-left-panel">
           <div className="left-panel-header">
-            <h2>Recent orders</h2>
+            <h2>Recent Orders</h2>
             <Button variant="outline-dark" size="sm">View All</Button>
           </div>
           <div className="left-panel-body">
-            <div className="left-panel-body-stats">
-              <img src="/chart_3.png" alt="" />
+            <div className="left-panel-RO">
+              <RecentOrders />
             </div>
           </div>
         </div>
