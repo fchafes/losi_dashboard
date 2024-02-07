@@ -6,6 +6,7 @@ import revenue from "/revenue.png";
 import SalesChart from "../components/SalesChart";
 import DailyChart from "../components/DailyChart";
 import OverviewChart from "../components/OverviewChart";
+import OverviewChartLegend from "../components/OverviewChartLegend";
 
 const SummaryPage = () => {
 
@@ -81,6 +82,7 @@ const SummaryPage = () => {
           </div>
           <div className="orders-right-panel-body">
             <OverviewChart />
+            <OverviewChartLegend />
           </div>
         </div>
       </div>
