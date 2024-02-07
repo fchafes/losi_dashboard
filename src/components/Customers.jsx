@@ -9,7 +9,7 @@ import {
 } from "@tremor/react";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-
+import "./Customers.css";
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
 
@@ -41,12 +41,6 @@ const Customers = () => {
             Overview of all registered customers in Losi.
           </p>
         </div>
-        <button
-          type="button"
-          className="mt-4 w-full whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis sm:mt-0 sm:w-fit"
-        >
-          Edit customer
-        </button>
       </div>
       <Table className="mt-8">
         <TableHead>
