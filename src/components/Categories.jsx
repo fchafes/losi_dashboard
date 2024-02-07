@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import "./Products.css";
 import React, { useState, useEffect } from "react";
-import ModalProductForm from "./ModalProductForm";
+import ModalCategoryForm from "./ModalCategoryForm";
 import DeleteModal from "./DeleteModal";
 
 const Categories = () => {
@@ -29,7 +29,7 @@ const Categories = () => {
       });
       setCategories(response.data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching categorys:", error);
     }
   };
 
@@ -37,14 +37,14 @@ const Categories = () => {
     fecthCategories();
   }, []);
 
-  const handleAddProduct = () => {
+  const handleAddCategory = () => {
     setOperation(1); // Establece la operación como agregar
     setIsModalOpen(true);
   };
 
-  const handleEditProduct = (product) => {
+  const handleEditProduct = (category) => {
     setOperation(2); // Establece la operación como editar
-    setSelectedProduct(product);
+    setSelectedProduct(category);
     setIsModalOpen(true);
   };
 
@@ -56,7 +56,7 @@ const Categories = () => {
       fetchProducts();
       handleCloseModal(); // Cierra el modal de confirmación después de eliminar el producto
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error("Error deleting category:", error);
     }
   };
 
@@ -65,14 +65,14 @@ const Categories = () => {
     setSelectedProduct(null);
   };
 
-  const handleOpenDeleteModal = (product) => {
-    setSelectedProduct(product);
+  const handleOpenDeleteModal = (category) => {
+    setSelectedProduct(category);
     console.log(
       "Estado de isDeleteModalOpen antes de abrir el modal:",
       isDeleteModalOpen
     );
     setIsDeleteModalOpen(true); //
-    console.log("Modal de eliminación abierto para el producto:", product);
+    console.log("Modal de eliminación abierto para el producto:", category);
   };
 
   return (
@@ -87,7 +87,7 @@ const Categories = () => {
           </p>
         </div>
         <button
-          onClick={handleAddProduct}
+          onClick={handleAddCategory}
           type="button"
           className="button mt-4 w-full whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis sm:mt-0 sm:w-fit"
         >
@@ -120,7 +120,7 @@ const Categories = () => {
 
               <TableCell>
                 <button
-                  onClick={() => handleEditProduct(product)}
+                  onClick={() => handleEditProduct(category)}
                   type="button"
                 >
                   <svg
@@ -138,14 +138,14 @@ const Categories = () => {
                     />
                   </svg>
                 </button>
-                <DeleteModal onDelete={() => handleDeleteProduct(product)} />
+                <DeleteModal onDelete={() => handleDeleteProduct(category)} />
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       {isModalOpen && (
-        <ModalProductForm
+        <ModalCategoryForm
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           operation={operation}
