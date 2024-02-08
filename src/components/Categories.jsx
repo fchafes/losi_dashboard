@@ -1,4 +1,3 @@
-// 'use client';
 import {
   Table,
   TableBody,
@@ -47,17 +46,6 @@ const Categories = () => {
     setSelectedCategory(category);
     setIsModalOpen(true);
   };
-  const handleConfirmDelete = async () => {
-    try {
-      await axios.delete(
-        `http://localhost:3000/category/${selectedCategory.id}`
-      );
-      fetchCategories(); // Actualiza la lista de categorías después de eliminar una
-      setIsDeleteModalOpen(false); // Cierra el modal de confirmación después de eliminar la categoría
-    } catch (error) {
-      console.error("Error deleting category:", error);
-    }
-  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -66,12 +54,8 @@ const Categories = () => {
 
   const handleOpenDeleteModal = (category) => {
     setSelectedCategory(category);
-    console.log(
-      "Estado de isDeleteModalOpen antes de abrir el modal:",
-      isDeleteModalOpen
-    );
-    setIsDeleteModalOpen(true); //
-    console.log("Modal de eliminación abierto para el producto:", category);
+    console.log(category);
+    setIsDeleteModalOpen(true);
   };
 
   return (
@@ -137,7 +121,10 @@ const Categories = () => {
                     />
                   </svg>
                 </button>
-                <DeleteModal onDelete={() => handleDeleteProduct(category)} />
+                <DeleteModal
+                  onClick={handleOpenDeleteModal}
+                  category={category}
+                />
               </TableCell>
             </TableRow>
           ))}
@@ -155,7 +142,7 @@ const Categories = () => {
         <DeleteModal
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)} // Cierra el modal de confirmación de eliminación
-          onConfirm={handleConfirmDelete} // Invoca la función para confirmar la eliminación
+          category={selectedCategory}
         />
       )}
     </>

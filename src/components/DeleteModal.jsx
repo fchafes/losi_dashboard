@@ -1,18 +1,22 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
-function DeleteModal({ onDelete }) {
+function DeleteModal({ isOpen, onClose, category }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDelete = () => {
-    onDelete(); // Invoca la función onDelete pasada como prop para realizar la eliminación del producto
-    handleClose(); // Cierra el modal después de realizar la eliminación
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/category/${category.id}`);
+      onClose();
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   };
-
   return (
     <>
       <button variant="danger" onClick={handleShow}>
