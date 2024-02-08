@@ -6,7 +6,7 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && category) {
       if (operation === 2) {
         setName(category.name);
       } else {
@@ -18,8 +18,8 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const handleSubmit = async () => {
     try {
       const formData = { name };
-
-      if (operation === 2) {
+      console.log(category);
+      if (operation === 2 && category && category.id) {
         formData.id = category.id;
       }
 
@@ -27,8 +27,8 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
       if (operation === 1) {
         response = await axios.post("http://localhost:3000/category", formData);
       } else {
-        response = await axios.put(
-          `http://localhost:3000/categories/${category.id}`,
+        response = await axios.patch(
+          `http://localhost:3000/category/${category.id}`,
           formData
         );
       }

@@ -18,7 +18,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura del modal
   const [operation, setOperation] = useState(1); // Estado para indicar la operación (1: agregar, 2: editar)
-  const [selectedProduct, setSelectedProduct] = useState(null); // Estado para almacenar el producto seleccionado para edición
+  const [selectedCategory, setSelectedCategory] = useState(null); // Estado para almacenar la categoría seleccionado para edición
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Estado para controlar la apertura del modal de eliminación
 
   const fecthCategories = async () => {
@@ -44,17 +44,16 @@ const Categories = () => {
 
   const handleEditProduct = (category) => {
     setOperation(2); // Establece la operación como editar
-    setSelectedProduct(category);
+    setSelectedCategory(category);
     setIsModalOpen(true);
   };
-
   const handleConfirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:3000/products/${selectedProduct.id}`
+        `http://localhost:3000/category/${selectedCategory.id}`
       );
-      fetchProducts();
-      handleCloseModal(); // Cierra el modal de confirmación después de eliminar el producto
+      fetchCategories(); // Actualiza la lista de categorías después de eliminar una
+      setIsDeleteModalOpen(false); // Cierra el modal de confirmación después de eliminar la categoría
     } catch (error) {
       console.error("Error deleting category:", error);
     }
@@ -62,11 +61,11 @@ const Categories = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedProduct(null);
+    setSelectedCategory(null);
   };
 
   const handleOpenDeleteModal = (category) => {
-    setSelectedProduct(category);
+    setSelectedCategory(category);
     console.log(
       "Estado de isDeleteModalOpen antes de abrir el modal:",
       isDeleteModalOpen
@@ -149,7 +148,7 @@ const Categories = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           operation={operation}
-          product={selectedProduct}
+          category={selectedCategory}
         />
       )}
       {isDeleteModalOpen && (
