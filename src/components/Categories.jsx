@@ -18,7 +18,7 @@ const Categories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura del modal
   const [operation, setOperation] = useState(1); // Estado para indicar la operación (1: agregar, 2: editar)
   const [selectedCategory, setSelectedCategory] = useState(null); // Estado para almacenar la categoría seleccionado para edición
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Estado para controlar la apertura del modal de eliminación
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const fecthCategories = async () => {
     try {
@@ -47,15 +47,21 @@ const Categories = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async () => {
+    await fecthCategories();
     setIsModalOpen(false);
+    setSelectedCategory(null);
+  };
+
+  const handleCloseDeleteModal = async () => {
+    await fecthCategories();
+    setShowDeleteModal(false);
     setSelectedCategory(null);
   };
 
   const handleOpenDeleteModal = (category) => {
     setSelectedCategory(category);
-    console.log(category);
-    setIsDeleteModalOpen(true);
+    setShowDeleteModal(true);
   };
 
   return (
@@ -123,7 +129,9 @@ const Categories = () => {
                 </button>
                 <DeleteModal
                   onClick={handleOpenDeleteModal}
+                  onClose={handleCloseDeleteModal}
                   category={category}
+                  show={showDeleteModal}
                 />
               </TableCell>
             </TableRow>
@@ -135,13 +143,6 @@ const Categories = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           operation={operation}
-          category={selectedCategory}
-        />
-      )}
-      {isDeleteModalOpen && (
-        <DeleteModal
-          isOpen={isDeleteModalOpen}
-          onClose={() => setIsDeleteModalOpen(false)} // Cierra el modal de confirmación de eliminación
           category={selectedCategory}
         />
       )}

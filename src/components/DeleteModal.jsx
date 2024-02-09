@@ -3,23 +3,20 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
-function DeleteModal({ isOpen, onClose, category }) {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+function DeleteModal({ show, onClick, onClose, category }) {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:3000/category/${category.id}`);
-      onClose();
     } catch (error) {
       console.error("Error deleting category:", error);
+    } finally {
+      onClose();
     }
   };
+
   return (
     <>
-      <button variant="danger" onClick={handleShow}>
+      <button variant="danger" onClick={onClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -36,7 +33,7 @@ function DeleteModal({ isOpen, onClose, category }) {
         </svg>
       </button>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={show} onHide={onClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Eliminar producto</Modal.Title>
         </Modal.Header>
@@ -44,7 +41,7 @@ function DeleteModal({ isOpen, onClose, category }) {
           ¿Estás seguro que deseas eliminar este producto?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={onClose}>
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
