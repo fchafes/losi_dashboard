@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { show_alerta } from "../functions";
 
 const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const [name, setName] = useState("");
@@ -18,7 +17,6 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const handleSubmit = async () => {
     try {
       const formData = { name };
-      console.log(category);
       if (operation === 2 && category && category.id) {
         formData.id = category.id;
       }
@@ -32,16 +30,8 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
           formData
         );
       }
-
-      const { tipo, msj } = response.data;
-      show_alerta(msj, tipo);
-
-      if (tipo === "success") {
-        onClose();
-      }
-    } catch (error) {
-      show_alerta("Error en la solicitud", "error");
-      console.error("Error:", error);
+    } finally {
+      onClose();
     }
   };
 

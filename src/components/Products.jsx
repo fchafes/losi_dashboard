@@ -60,11 +60,11 @@ const Products = () => {
     }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async () => {
+    await fecthProducts();
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
-
   const handleOpenDeleteModal = (product) => {
     setSelectedProduct(product);
     console.log(

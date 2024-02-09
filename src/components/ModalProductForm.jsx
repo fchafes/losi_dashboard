@@ -1,12 +1,12 @@
 // ModalProductForm.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { show_alerta } from "../functions";
 
 const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -24,7 +24,11 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
 
   const handleSubmit = async () => {
     try {
-      const formData = { name, description, price };
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("photo", photo);
 
       if (operation === 2) {
         formData.id = product.id;
@@ -32,23 +36,28 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
 
       let response;
       if (operation === 1) {
-        response = await axios.post("http://localhost:3000/products", formData);
+        response = await axios.post(
+          "http://localhost:3000/products",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       } else {
         response = await axios.put(
           `http://localhost:3000/products/${product.id}`,
-          formData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
       }
-
-      const { tipo, msj } = response.data;
-      show_alerta(msj, tipo);
-
-      if (tipo === "success") {
-        onClose();
-      }
-    } catch (error) {
-      show_alerta("Error en la solicitud", "error");
-      console.error("Error:", error);
+    } finally {
+      onClose();
     }
   };
 
@@ -106,6 +115,18 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
+            <div className="input-group mb-3">
+              <label htmlFor="image" className="input-group-text">
+                <i className="fa-solid fa-image"></i>
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="image"
+                onChange={(e) => setPhoto(e.target.files[0])}
+              />
+            </div>
+
             <div className="d-grid col-6 mx-auto">
               <button onClick={handleSubmit} className="btn btn-success">
                 <i className="fa-solid fa-floppy-disk"></i> Guardar
