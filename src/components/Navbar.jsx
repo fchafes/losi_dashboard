@@ -1,5 +1,4 @@
-
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
 import Form from 'react-bootstrap/Form';
@@ -7,9 +6,14 @@ import Button from 'react-bootstrap/Button';
 import "./Navbar.css";
 
 const Navbar = () => {
-  const isLoginPage = location.pathname === "/login"; 
-  if (isLoginPage) {
+  const isLoginPage = location.pathname === "/login";
+  const is404Page = location.pathname === "/404"; 
+  if (isLoginPage || is404Page) {
     return null;
+  }
+  const navigate = useNavigate();
+  const handleClick = (path) => {
+    navigate(path);
   }
 
   return (
@@ -39,10 +43,10 @@ const Navbar = () => {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <Link to={item.path}>
+                  <div onClick={() => handleClick(item.path)}>
                     {item.icon}
                     <span>{item.title}</span>
-                  </Link>
+                  </div>
                 </li>
               );
             })}
