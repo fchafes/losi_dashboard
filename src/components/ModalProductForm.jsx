@@ -9,6 +9,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
   const [price, setPrice] = useState("");
   const [photo, setPhoto] = useState("");
   const token = useSelector((state) => state.token.tokens);
+  const [featured, setFeatured] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -16,10 +17,12 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
         setName(product.name);
         setDescription(product.description);
         setPrice(product.price);
+        setFeatured(product.featured);
       } else {
         setName("");
         setDescription("");
         setPrice("");
+        setFeatured(false);
       }
     }
   }, [isOpen, operation, product]);
@@ -31,6 +34,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
       formData.append("description", description);
       formData.append("price", price);
       formData.append("photo", photo);
+      formData.append("featured", featured);
 
       if (operation === 2) {
         formData.id = product.id;
@@ -48,15 +52,15 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
           data: formData,
         });
       } else {
-        response = await axios.put(
-          `http://localhost:3000/products/${product.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        response = await axios({
+          method: "PATCH",
+          url: `http://localhost:3000/products/${product.id}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+          data: formData,
+        });
       }
     } finally {
       onClose();
@@ -127,6 +131,19 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
                 id="image"
                 onChange={(e) => setPhoto(e.target.files[0])}
               />
+            </div>
+            <div className="input-group mb-3">
+              <div className="input-group-text">
+                <input
+                  type="checkbox"
+                  id="featured"
+                  checked={featured}
+                  onChange={(e) => setFeatured(!!e.target.checked)}
+                />
+                <label htmlFor="featured" className="form-check-label">
+                  Destacado
+                </label>
+              </div>
             </div>
 
             <div className="d-grid col-6 mx-auto">
