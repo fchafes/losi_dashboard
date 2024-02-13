@@ -57,7 +57,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
           url: `http://localhost:3000/products/${product.id}`,
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
           data: formData,
         });
