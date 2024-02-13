@@ -2,17 +2,26 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function DeleteModal({ show, onClick, onClose, category }) {
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/category/${category.id}`);
+      await axios({
+        method: "DELETE",
+        url: `http://localhost:3000/category/${category.id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
     } catch (error) {
       console.error("Error deleting category:", error);
     } finally {
       onClose();
     }
   };
+  const token = useSelector((state) => state.token.tokens);
 
   return (
     <>
