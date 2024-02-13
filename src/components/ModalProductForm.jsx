@@ -10,8 +10,19 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
   const [photo, setPhoto] = useState("");
   const token = useSelector((state) => state.token.tokens);
   const [featured, setFeatured] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState("");
 
   useEffect(() => {
+    // Fetch categories when the modal is opened
+    async function fetchCategories() {
+      try {
+        const response = await axios.get("http://localhost:3000/category");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    }
     if (isOpen) {
       if (operation === 2) {
         setName(product.name);
@@ -24,6 +35,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
         setPrice("");
         setFeatured(false);
       }
+      fetchCategories();
     }
   }, [isOpen, operation, product]);
 
@@ -35,6 +47,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
       formData.append("price", price);
       formData.append("photo", photo);
       formData.append("featured", featured);
+      formData.append("categoryId", categoryId);
 
       if (operation === 2) {
         formData.id = product.id;
@@ -145,7 +158,24 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
                 </label>
               </div>
             </div>
-
+            <div className="input-group mb-3">
+              <label htmlFor="category" className="input-group-text">
+                Categoría
+              </label>
+              <select
+                className="form-select"
+                id="category"
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+              >
+                <option value="">Seleccione una categoría</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="d-grid col-6 mx-auto">
               <button onClick={handleSubmit} className="btn btn-success">
                 <i className="fa-solid fa-floppy-disk"></i> Guardar
