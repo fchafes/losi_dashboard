@@ -38,17 +38,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
 
       let response;
       if (operation === 1) {
-        response = 
-        // await axios.post(
-        //   "http://localhost:3000/products",
-        //   formData,
-        //   {
-        //     headers: {
-        //       "Content-Type": "multipart/form-data",
-        //     },
-        //   }
-        // );
-        await axios({
+        response = await axios({
           method: "POST",
           url: `http://localhost:3000/products`,
           headers: {
