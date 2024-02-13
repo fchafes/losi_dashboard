@@ -116,7 +116,13 @@ const Products = () => {
               </TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell className="product-image">
-                <img src={product.photo} alt="product" />
+                <img
+                  src={
+                    product.photo.startsWith("https")
+                      ? product.photo
+                      : `http://localhost:3000/${product.photo}`
+                  }
+                />
               </TableCell>
               <TableCell className="description-cell">
                 {product.description}
