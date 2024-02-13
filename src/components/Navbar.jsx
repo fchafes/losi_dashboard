@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import "./Navbar.css";
-import { Link } from 'react-router-dom';
+import * as IoIcons from "react-icons/io";
+import ModalConfirmLogout from './ModalConfirmLogout';
+import { deleteData } from '../redux/tokenReducer';
 
 const Navbar = () => {
   const isLoginPage = location.pathname === "/login";
@@ -12,10 +16,17 @@ const Navbar = () => {
   if (isLoginPage || is404Page) {
     return null;
   }
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = (path) => {
     navigate(path);
   }
+  const [showModal, setShowModal] = useState(false);
+  const handleLogout = () => {
+    dispatch(deleteData());
+    navigate("/login");
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -51,9 +62,20 @@ const Navbar = () => {
                 </li>
               );
             })}
+            <li className="nav-text" onClick={() => setShowModal(true)}>
+              <div className='nav-text-link'>
+                <IoIcons.IoMdPeople />
+                <span>Logout</span>
+              </div>
+            </li>
           </ul>
         </nav>
       </IconContext.Provider>
+      <ModalConfirmLogout 
+        show={showModal} 
+        onClose={() => setShowModal(false)} 
+        onConfirm={handleLogout}
+      />
     </>
   );
 };

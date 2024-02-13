@@ -26,14 +26,20 @@ const tokenSlice = createSlice({
         // Si no hay datos (cerrar sesión)
         state.tokens = null;
         state.email = null;
+        state.userId = null;
       
       }
     },
+    deleteData: (state, action) => {
+      state.tokens = null;
+      state.email = null;
+      state.userId = null;
+    }
   },
 });
 
 const persistedTokenReducer = persistReducer(tokenPersistConfig, tokenSlice.reducer);
 
-export const { createData } = tokenSlice.actions;
+export const { createData, deleteData } = tokenSlice.actions;
 
 export default persistedTokenReducer;
