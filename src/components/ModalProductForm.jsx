@@ -52,15 +52,15 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
           data: formData,
         });
       } else {
-        response = await axios.put(
-          `http://localhost:3000/products/${product.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        response = await axios({
+          method: "PATCH",
+          url: `http://localhost:3000/products/${product.id}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: formData,
+        });
       }
     } finally {
       onClose();
@@ -138,7 +138,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
                   type="checkbox"
                   id="featured"
                   checked={featured}
-                  onChange={(e) => setFeatured(e.target.checked)}
+                  onChange={(e) => setFeatured(!!e.target.checked)}
                 />
                 <label htmlFor="featured" className="form-check-label">
                   Destacado

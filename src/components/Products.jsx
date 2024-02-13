@@ -12,14 +12,14 @@ import axios from "axios";
 import "./Products.css";
 import React, { useState, useEffect } from "react";
 import ModalProductForm from "./ModalProductForm";
-import DeleteModal from "./DeleteModal";
+import DeleteProductModal from "./DeleteProductModal";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura del modal
   const [operation, setOperation] = useState(1); // Estado para indicar la operación (1: agregar, 2: editar)
   const [selectedProduct, setSelectedProduct] = useState(null); // Estado para almacenar el producto seleccionado para edición
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Estado para controlar la apertura del modal de eliminación
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para controlar la apertura del modal de eliminación
 
   const fecthProducts = async () => {
     try {
@@ -48,31 +48,21 @@ const Products = () => {
     setIsModalOpen(true);
   };
 
-  const handleConfirmDelete = async () => {
-    try {
-      await axios.delete(
-        `http://localhost:3000/products/${selectedProduct.id}`
-      );
-      fetchProducts();
-      handleCloseModal(); // Cierra el modal de confirmación después de eliminar el producto
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
-  };
-
   const handleCloseModal = async () => {
     await fecthProducts();
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
+
+  const handleCloseDeleteModal = async () => {
+    await fecthProducts();
+    setShowDeleteModal(false);
+    setSelectedProduct(null);
+  };
+
   const handleOpenDeleteModal = (product) => {
     setSelectedProduct(product);
-    console.log(
-      "Estado de isDeleteModalOpen antes de abrir el modal:",
-      isDeleteModalOpen
-    );
-    setIsDeleteModalOpen(true); //
-    console.log("Modal de eliminación abierto para el producto:", product);
+    setShowDeleteModal(true);
   };
 
   return (
@@ -153,7 +143,12 @@ const Products = () => {
                     />
                   </svg>
                 </button>
-                <DeleteModal onDelete={() => handleDeleteProduct(product)} />
+                <DeleteProductModal
+                  onClick={handleOpenDeleteModal}
+                  onClose={handleCloseDeleteModal}
+                  product={product}
+                  show={showDeleteModal}
+                />
               </TableCell>
             </TableRow>
           ))}
@@ -165,13 +160,6 @@ const Products = () => {
           onClose={handleCloseModal}
           operation={operation}
           product={selectedProduct}
-        />
-      )}
-      {isDeleteModalOpen && (
-        <DeleteModal
-          isOpen={isDeleteModalOpen}
-          onClose={() => setIsDeleteModalOpen(false)} // Cierra el modal de confirmación de eliminación
-          onConfirm={handleConfirmDelete} // Invoca la función para confirmar la eliminación
         />
       )}
     </>
