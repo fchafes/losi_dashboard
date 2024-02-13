@@ -1,6 +1,7 @@
 // App.jsx
 import Navbar from "./components/Navbar";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ShowOrders from "./components/ShowOrders";
 import Login from "./pages/Login";
 import SummaryPage from "./pages/SummaryPage";
@@ -11,13 +12,16 @@ import ProtectedRoute from "./pages/ProtectedRoute"
 import NotFound404 from "./pages/NotFound404";
 
 function App() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login navigate={navigate} />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<SummaryPage />} />
+          <Route path="/home" element={<SummaryPage />} />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/products" element={<Products />} />
           <Route path="/orders" element={<ShowOrders />} />
           <Route path="/customers" element={<Customers />} />

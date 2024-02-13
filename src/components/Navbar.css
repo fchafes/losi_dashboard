@@ -60,7 +60,7 @@
     margin-left: 10px;
   }
   
-  .nav-text a {
+  .nav-text-link {
     text-decoration: none;
     color: #151414;
     font-size: 18px;
@@ -70,9 +70,10 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
+    cursor: pointer;
   }
   
-  .nav-text a:hover {
+  .nav-text-link:hover {
     background-color: #000000;
     color: #fff;
   }

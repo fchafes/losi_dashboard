@@ -2,14 +2,12 @@ import "./Login.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import logo from "/losiFlor.png";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { createData } from "../redux/tokenReducer.js";
 
-function Login() {
-  const navigate = useNavigate();
+function Login({ navigate }) {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
@@ -37,8 +35,7 @@ function Login() {
       if (response.status === 200) {
         const data = response.data;
         dispatch(createData(data));
-        navigate("/");
-        console.log(data);
+        navigate("/home");
       }
     } catch (error) {
       console.log("Error:", error);

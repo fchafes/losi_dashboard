@@ -4,6 +4,7 @@ import { IconContext } from "react-icons";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import "./Navbar.css";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const isLoginPage = location.pathname === "/login";
@@ -43,7 +44,7 @@ const Navbar = () => {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <div onClick={() => handleClick(item.path)}>
+                  <div className='nav-text-link' onClick={() => handleClick(item.path)}>
                     {item.icon}
                     <span>{item.title}</span>
                   </div>
