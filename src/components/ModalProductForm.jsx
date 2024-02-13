@@ -1,12 +1,14 @@
 // ModalProductForm.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [photo, setPhoto] = useState("");
+  const token = useSelector((state) => state.token.tokens);
 
   useEffect(() => {
     if (isOpen) {
@@ -36,15 +38,25 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
 
       let response;
       if (operation === 1) {
-        response = await axios.post(
-          "http://localhost:3000/products",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        response = 
+        // await axios.post(
+        //   "http://localhost:3000/products",
+        //   formData,
+        //   {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   }
+        // );
+        await axios({
+          method: "POST",
+          url: `http://localhost:3000/products`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+          data: formData,
+        });
       } else {
         response = await axios.put(
           `http://localhost:3000/products/${product.id}`,

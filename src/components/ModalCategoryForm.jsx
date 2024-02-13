@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const [name, setName] = useState("");
+  const token = useSelector((state) => state.token.tokens);
+  
 
   useEffect(() => {
     if (isOpen && category) {
@@ -23,12 +26,25 @@ const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
 
       let response;
       if (operation === 1) {
-        response = await axios.post("http://localhost:3000/category", formData);
+        response = await axios({
+          method: "POST",
+          url: `http://localhost:3000/category`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: formData,
+        });
       } else {
-        response = await axios.patch(
-          `http://localhost:3000/category/${category.id}`,
-          formData
-        );
+        response = await axios({
+          method: "PATCH",
+          url: `http://localhost:3000/category/${category.id}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: formData,
+        });
       }
     } finally {
       onClose();
