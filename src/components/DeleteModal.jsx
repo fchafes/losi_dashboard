@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 function DeleteModal({ show, onClick, onClose, category }) {
   const handleDelete = async () => {
@@ -18,6 +19,10 @@ function DeleteModal({ show, onClick, onClose, category }) {
     } catch (error) {
       console.error("Error deleting category:", error);
     } finally {
+      Swal.fire({
+        icon: "success",
+        title: "Deleted successfully!",
+      });
       onClose();
     }
   };
