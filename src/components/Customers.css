@@ -1,0 +1,43 @@
+.customers-container {
+  padding: 20px;
+}
+
+.customers-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.customers-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.customers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.customers-table th,
+.customers-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 768px) {
+  .customers-heading {
+    font-size: 20px;
+  }
+
+  .customers-description {
+    font-size: 14px;
+  }
+
+  .customers-table th,
+  .customers-table td {
+    font-size: 12px;
+  }
+}
