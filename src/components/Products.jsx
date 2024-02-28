@@ -180,10 +180,11 @@ const Products = () => {
               <TableCell>{product.price}</TableCell>
 
               <TableCell>
-                <button onClick={() => handleEditStock(product)} type="button">
+                <button className="edit-cell" onClick={() => handleEditStock(product)} type="button">
                   <LuBoxes />
                 </button>
                 <button
+                className="edit-cell"
                   onClick={() => handleEditProduct(product)}
                   type="button"
                 >
@@ -203,6 +204,7 @@ const Products = () => {
                   </svg>
                 </button>
                 <button
+                className="edit-cell"
                   variant="danger"
                   onClick={() => handleOpenDeleteModal(product)}
                 >
