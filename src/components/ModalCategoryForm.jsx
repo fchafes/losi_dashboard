@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import "./ModalCategoryForm.css";
+
 
 const ModalCategoryForm = ({ isOpen, onClose, operation, category }) => {
   const [name, setName] = useState("");

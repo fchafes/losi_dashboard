@@ -146,7 +146,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
               />
             </div>
             <div className="input-group mb-3">
-              <div className="input-group-text">
+              <div id="price" className="input-group-text">
                 <input
                   type="checkbox"
                   id="featured"
@@ -154,7 +154,7 @@ const ModalProductForm = ({ isOpen, onClose, operation, product }) => {
                   onChange={(e) => setFeatured(!!e.target.checked)}
                 />
                 <label htmlFor="featured" className="form-check-label">
-                  Destacado
+                   Destacado
                 </label>
               </div>
             </div>
