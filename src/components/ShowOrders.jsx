@@ -72,6 +72,8 @@ const ShowOrders = () => {
               <TableCell>{order.createdAt}</TableCell>
               <TableCell>{order.state}</TableCell>
               <TableCell>{order.payment_method}</TableCell>
+              <TableCell>{order.customerId}</TableCell>
+
             </TableRow>
           ))}
         </TableBody>
